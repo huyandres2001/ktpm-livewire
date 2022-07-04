@@ -3,3 +3,7 @@ window.PerfectScrollbar = PerfectScrollbar;
 
 require('./bootstrap');
 require('./custom');
+
+
+var Turbolinks = require("turbolinks")
+Turbolinks.start()
