@@ -25,7 +25,7 @@
             @include('layouts.navbars.auth.sidebar')
             @include('layouts.navbars.auth.nav')
             @include('components.plugins.fixed-plugin')
-            {{ $slot }} ok
+            {{ $slot }}
             <main>
                 <div class="container-fluid">
                     <div class="row">
