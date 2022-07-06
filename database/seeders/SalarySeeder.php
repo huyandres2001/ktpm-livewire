@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Salary;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class SalarySeeder extends Seeder
 {
@@ -14,6 +16,8 @@ class SalarySeeder extends Seeder
      */
     public function run()
     {
-        //
+
+        DB::table('salaries')->truncate();
+        Salary::factory()->count(10)->create();
     }
 }

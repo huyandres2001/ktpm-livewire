@@ -10,9 +10,12 @@ class EduLevel extends Model
     use HasFactory;
     protected $table = 'edu_levels';
     protected $fillable = [
-        'name', 'major', 'certificate',
+        'name',
+        'major',
+        'certificate',
     ];
-    public function employees(){
+    public function employees()
+    {
         return $this->hasMany(User::class, 'edu_level_id', 'id');
     }
 }

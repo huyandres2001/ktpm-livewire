@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('progress');
             $table->string('status');
             $table->string('kpi');
+            $table->foreignId('job_id')->references('id')->on('jobs');
             $table->timestamps();
         });
     }

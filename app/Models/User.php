@@ -63,7 +63,18 @@ class User extends Authenticatable
     protected $guarded = [];
 
     protected $fillable = [
-        'name', 'gender', 'birthday', 'phone', 'email', 'identity_card', 'location', 'department_id', 'edu_level_id',
+        'name',
+        'gender',
+        'birthday',
+        'phone',
+        'email',
+        'identity_card',
+        'location',
+        'department_id',
+        'edu_level_id',
+        'salary_id',
+        'position_id',
+
 
     ];
 

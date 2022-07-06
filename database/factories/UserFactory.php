@@ -3,8 +3,12 @@
 namespace Database\Factories;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Department;
+use App\Models\EduLevel;
+use App\Models\Position;
+use App\Models\Salary;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserFactory extends Factory
 {
@@ -22,12 +26,24 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $gender = $this->faker->randomElement(['male', 'female']);
+        $department_id = Department::pluck('id')->toArray();
+        $edu_level_id = EduLevel::pluck('id')->toArray();
         return [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->name($gender = $this->faker->randomElement(['male', 'female'])),
+            'gender' => $gender,
+            'birthday' => $this->faker->dateTimeBetween('-60 years', '-18 years'),
+            'phone' => $this->faker->unique()->tollFreePhoneNumber(),
             'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
+            'identity_card' => $this->faker->bankAccountNumber(),
+            'location' => $this->faker->address(),
+            'department_id' => $this->faker->randomElement($department_id),
+            'edu_level_id' => $this->faker->randomElement(EduLevel::pluck('id')->toArray()),
+            'salary_id' => $this->faker->randomElement(Salary::pluck('id')->toArray()),
+            'position_id' => $this->faker->randomElement(Position::pluck('id')->toArray()),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            'email_verified_at' => now(),
         ];
     }
 

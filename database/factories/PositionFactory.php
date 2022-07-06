@@ -17,7 +17,19 @@ class PositionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->unique()->randomElement([
+                'Director',
+                'Deputy',
+                'Chief Executive Officer',
+                'Chief Information Officer ',
+                'Chief Operating Officer',
+                'Chief Financial Officer',
+                'Board of Directors',
+                'Share holder',
+                'Executive',
+                'Founder'
+            ]),
+            'description' => $this->faker->text(),
         ];
     }
 }

@@ -17,7 +17,10 @@ class DepartmentFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name(),
+            'address' => $this->faker->text(50),
+            'manager_id' => $this->faker->randomNumber(2, false),
+            'phone' => $this->faker->phoneNumber(),
         ];
     }
 }

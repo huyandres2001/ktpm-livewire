@@ -17,7 +17,6 @@ namespace App\Models{
  * @property int $id
  * @property string $name
  * @property string|null $address
- * @property int $number_of_employees
  * @property string $manager_id
  * @property string $phone
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -34,7 +33,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Department whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Department whereManagerId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Department whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Department whereNumberOfEmployees($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Department wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Department whereUpdatedAt($value)
  */
@@ -76,13 +74,12 @@ namespace App\Models{
  * @property string|null $description
  * @property string|null $note
  * @property string|null $schedule
- * @property int $job_evaluation_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $employees
  * @property-read int|null $employees_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\JobEvaluation[] $job_evaluation
- * @property-read int|null $job_evaluation_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\JobEvaluation[] $job_evaluations
+ * @property-read int|null $job_evaluations_count
  * @method static \Database\Factories\JobFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Job newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Job newQuery()
@@ -90,7 +87,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereJobEvaluationId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereNote($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereSchedule($value)
@@ -107,6 +103,7 @@ namespace App\Models{
  * @property string $progress
  * @property string $status
  * @property string $kpi
+ * @property int $job_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Job $job
@@ -116,6 +113,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|JobEvaluation query()
  * @method static \Illuminate\Database\Eloquent\Builder|JobEvaluation whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobEvaluation whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobEvaluation whereJobId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobEvaluation whereKpi($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobEvaluation whereProgress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobEvaluation whereStatus($value)
@@ -215,7 +213,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property int|null $gender
+ * @property string|null $gender
  * @property string|null $birthday
  * @property string $identity_card
  * @property int $department_id

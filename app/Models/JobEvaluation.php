@@ -12,8 +12,9 @@ class JobEvaluation extends Model
         'progress',
         'status',
         'kpi',
+        'job_id',
     ];
     public function job(){
-        return $this->belongsTo(Job::class,'job_evaluation_id', 'id');
+        return $this->belongsTo(Job::class,'job_id', 'id');
     }
 }

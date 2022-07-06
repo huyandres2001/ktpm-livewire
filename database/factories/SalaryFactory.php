@@ -18,6 +18,10 @@ class SalaryFactory extends Factory
     {
         return [
             //
+            'basic_salary' => $this->faker->randomDigitNotNull() * 10000000,
+            'cofficient' => $this->faker->randomNumber(2,false) / 10,
+            'allowance' => $this->faker->randomDigitNotNull() * 1000000,
+            'bonus' => $this->faker->randomDigitNotNull() * 1000000,
         ];
     }
 }

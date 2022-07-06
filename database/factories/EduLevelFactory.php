@@ -17,7 +17,6 @@ class EduLevelFactory extends Factory
     public function definition()
     {
         return [
-            //
         ];
     }
 }

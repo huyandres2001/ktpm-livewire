@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('address')->nullable();
-            $table->integer('number_of_employees');
             $table->string('manager_id');
             $table->string('phone')->unique();
             $table->timestamps();

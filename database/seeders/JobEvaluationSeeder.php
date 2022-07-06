@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class JobEvaluationSeeder extends Seeder
 {
@@ -15,5 +16,7 @@ class JobEvaluationSeeder extends Seeder
     public function run()
     {
         //
+        DB::table('job_evaluations')->truncate();
+
     }
 }

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->text('note')->nullable();
             $table->date('schedule')->nullable();
-            $table->foreignId('job_evaluation_id')->references('id')->on('job_evaluations');
             $table->timestamps();
         });
     }
