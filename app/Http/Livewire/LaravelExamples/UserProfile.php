@@ -11,16 +11,18 @@ class UserProfile extends Component
     public $showSuccesNotification  = false;
 
     public $showDemoNotification = false;
-    
+
     protected $rules = [
         'user.name' => 'max:40|min:3',
         'user.email' => 'email:rfc,dns',
         'user.phone' => 'max:10',
         'user.about' => 'max:200',
-        'user.location' => 'min:3'
+        'user.location' => 'min:3',
+        'user.identity_card' => 'string|required|min:5|max:20',
+        'user.gender' => 'string|required'
     ];
 
-    public function mount() { 
+    public function mount() {
         $this->user = auth()->user();
     }
 
@@ -35,6 +37,7 @@ class UserProfile extends Component
     }
     public function render()
     {
+
         return view('livewire.laravel-examples.user-profile');
     }
 }

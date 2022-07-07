@@ -106,7 +106,11 @@ class User extends Authenticatable
     }
     public function positions()
     {
-        return $this->belongsToMany(Job::class, 'employee_position', 'employee_id', 'position_id');
+        return $this->belongsToMany(Position::class, 'employee_position', 'employee_id', 'position_id');
+    }
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
     public function salary()
     {

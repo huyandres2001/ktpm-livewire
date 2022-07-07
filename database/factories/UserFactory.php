@@ -40,7 +40,6 @@ class UserFactory extends Factory
             'department_id' => $this->faker->randomElement($department_id),
             'edu_level_id' => $this->faker->randomElement(EduLevel::pluck('id')->toArray()),
             'salary_id' => $this->faker->randomElement(Salary::pluck('id')->toArray()),
-            'position_id' => $this->faker->randomElement(Position::pluck('id')->toArray()),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
             'email_verified_at' => now(),

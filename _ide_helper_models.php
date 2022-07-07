@@ -219,11 +219,11 @@ namespace App\Models{
  * @property int $department_id
  * @property int $edu_level_id
  * @property int $salary_id
- * @property int $position_id
+ * @property-read \App\Models\Department $department
  * @property-read \App\Models\EduLevel $eduLevel
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Job[] $jobs
  * @property-read int|null $jobs_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Job[] $positions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Position[] $positions
  * @property-read int|null $positions_count
  * @property-read \App\Models\Salary $salary
  * @method static \Illuminate\Database\Eloquent\Builder|User whereBirthday($value)
@@ -231,7 +231,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEduLevelId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereGender($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIdentityCard($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User wherePositionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSalaryId($value)
  */
 	class User extends \Eloquent {}

@@ -20,7 +20,7 @@ class Login extends Component
         if(auth()->user()){
             redirect('/dashboard');
         }
-        $this->fill(['email' => 'admin@softui.com', 'password' => 'secret']);
+        $this->fill(['email' => 'huy.nv28122001@gmail.com', 'password' => 'password']);
     }
 
     public function login() {
@@ -28,15 +28,19 @@ class Login extends Component
         if(auth()->attempt(['email' => $this->email, 'password' => $this->password], $this->remember_me)) {
             $user = User::where(["email" => $this->email])->first();
             auth()->login($user, $this->remember_me);
-            return redirect()->intended('/dashboard');        
+            return redirect()->intended('/dashboard');
         }
         else{
-            return $this->addError('email', trans('auth.failed')); 
+            return $this->addError('email', trans('auth.failed'));
         }
     }
 
     public function render()
     {
         return view('livewire.auth.login');
+    }
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
     }
 }
