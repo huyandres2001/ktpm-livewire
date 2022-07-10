@@ -71,7 +71,6 @@ class User extends Authenticatable
         'identity_card',
         'location',
         'department_id',
-        'edu_level_id',
         'salary_id',
         'position_id',
 
@@ -99,10 +98,6 @@ class User extends Authenticatable
     public function jobs()
     {
         return $this->belongsToMany(Job::class, 'employee_job', 'employee_id', 'job_id');
-    }
-    public function eduLevel()
-    {
-        return $this->belongsTo(EduLevel::class);
     }
     public function positions()
     {

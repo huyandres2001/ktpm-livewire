@@ -1,5 +1,5 @@
 @php
-$departments = getDepartments();
+$departments = getAllDepartments();
 @endphp
 <div>
     <div class="container-fluid">
@@ -11,12 +11,12 @@ $departments = getDepartments();
             <div class="row gx-4">
                 <div class="col-auto">
                     <div class="avatar avatar-xl position-relative">
-                        <img src="../assets/img/bruce-mars.jpg" alt="..." class="w-100 border-radius-lg shadow-sm">
+                        {{-- <img src="../assets/img/bruce-mars.jpg" alt="..." class="w-100 border-radius-lg shadow-sm">
                         <a href="javascript:;"
                             class="btn btn-sm btn-icon-only bg-gradient-light position-absolute bottom-0 end-0 mb-n2 me-n2">
                             <i class="fa fa-pen top-0" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="Edit Image"></i>
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
                 <div class="col-auto my-auto">
@@ -241,21 +241,56 @@ $departments = getDepartments();
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="user-gender">{{ __('Department') }}</label>
-                                <select wire:model="user.department" class="form-control" id="user-department">
-                                    <option selected>Select department</option>
-                                    @php
-                                        $user = $user->load('department');
-                                    @endphp
-                                    @foreach ( as )
-
+                                <select wire:model="user.department_id" wire:ignore class="form-control"
+                                    id="user-department">
+                                    <option selected value="{{ $user->department_id }}">
+                                        {{ $user->department->name }}
+                                    </option>
+                                    @foreach ($departments as $department)
+                                        <option value="{{ $department->id }}">
+                                            {{ $department->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('user.department_id')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="user-salary"
+                                    class="form-control-label">{{ __('Salary') }}</label>
+                                <div class="@error('user.identity_card') border border-danger rounded-3 @enderror">
+                                    <input value="{{$user->salary->basic_salary}} USD" disabled class="form-control"
+                                        type="text" id="user-identity_card">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="user-major"
+                                       class="form-control-label">{{ __('Major') }}</label>
+                                <div class="@error('user.major') border border-danger rounded-3 @enderror">
+                                    <input value="{{$user->major}}"  class="form-control"
+                                           type="text" id="user-major">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="user-certificate"
+                                       class="form-control-label">{{ __('Certificate') }}</label>
+                                <div class="@error('user.certificate') border border-danger rounded-3 @enderror">
+                                    <input value="{{$user->certificate}}"  class="form-control"
+                                           type="text" id="user-certificate">
+                                </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="about">{{ 'About Me' }}</label>
                         <div class="@error('user.about') border border-danger rounded-3 @enderror">

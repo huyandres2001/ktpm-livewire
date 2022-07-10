@@ -19,7 +19,10 @@ class UserProfile extends Component
         'user.about' => 'max:200',
         'user.location' => 'min:3',
         'user.identity_card' => 'string|required|min:5|max:20',
-        'user.gender' => 'string|required'
+        'user.gender' => 'string|required',
+        'user.department_id' => 'required',
+        'user.major' => 'required',
+        'user.certificate' => 'required',
     ];
 
     public function mount() {

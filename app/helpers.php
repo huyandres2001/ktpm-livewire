@@ -1,11 +1,11 @@
 <?php
 
+
 use App\Models\Department;
 
-if (!function_exists('getDepartments')) {
-    function getDepartments()
+if (!function_exists('getAllDepartments')) {
+    function getAllDepartments(): \Illuminate\Database\Eloquent\Collection
     {
-        $departments = Department::all();
-        return $departments;
+        return Department::all();
     }
 }

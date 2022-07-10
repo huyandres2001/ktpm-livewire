@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Job;
 use App\Models\User;
 use App\Models\Salary;
-use App\Models\EduLevel;
 use App\Models\Position;
 use App\Models\Department;
 use App\Models\JobEvaluation;
@@ -27,19 +26,54 @@ class UserSeeder extends Seeder
 
         DB::table('users')->truncate();
         DB::table('users')->insert([
-            'name' => 'Admin',
-            'gender' => 'male',
-            'birthday' => '2001-12-28',
-            'phone' => '0886152192',
-            'email' => 'huy.nv28122001@gmail.com',
-            'identity_card' => '31231321321',
-            'location' => 'VN',
-            'department_id' => 1,
-            'email_verified_at' => now(),
-            'edu_level_id' => 1,
-            'salary_id' => 1,
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            [
+                'name' => 'Admin',
+                'gender' => 'male',
+                'birthday' => '2001-12-28',
+                'phone' => '0886152192',
+                'email' => 'huy.nv28122001@gmail.com',
+                'identity_card' => '31231321321',
+                'location' => 'VN',
+                'major' => 'IT',
+                'certificate' => 'Professor',
+                'department_id' => 1,
+                'email_verified_at' => now(),
+                'salary_id' => 1,
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'remember_token' => Str::random(10),
+            ],
+            [
+                'name' => 'Employee',
+                'gender' => 'male',
+                'birthday' => '2001-12-28',
+                'phone' => '08861521921',
+                'email' => 'huyandres2001@gmail.com',
+                'identity_card' => '3123132132321',
+                'location' => 'VN',
+                'major' => 'IT',
+                'certificate' => 'Professor',
+                'department_id' => 1,
+                'email_verified_at' => now(),
+                'salary_id' => 1,
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'remember_token' => Str::random(10),
+            ],
+            [
+                'name' => 'Leader',
+                'gender' => 'male',
+                'birthday' => '2001-12-28',
+                'phone' => '0886152192213',
+                'email' => 'huy.nv192914@sis.hust.edu.vn',
+                'identity_card' => '312313213213123',
+                'location' => 'VN',
+                'major' => 'IT',
+                'certificate' => 'Professor',
+                'department_id' => 1,
+                'email_verified_at' => now(),
+                'salary_id' => 1,
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'remember_token' => Str::random(10),
+            ],
         ]);
 
         //delete all records from the following tables

@@ -22,8 +22,9 @@ class CreateUsersTable extends Migration
             $table->string('email', 50)->nullable()->unique();
             $table->string('identity_card')->unique();
             $table->string('location')->nullable();
+            $table->string('major')->nullable();
+            $table->string('certificate')->nullable();
             $table->foreignId('department_id')->references('id')->on('departments');
-            $table->foreignId('edu_level_id')->references('id')->on('edu_levels');
             $table->foreignId('salary_id')->references('id')->on('salaries');
             $table->string('password');
             $table->text('about')->nullable();

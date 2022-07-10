@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\User;
 use App\Models\Department;
-use App\Models\EduLevel;
 use App\Models\Position;
 use App\Models\Salary;
 use Illuminate\Support\Str;
@@ -28,7 +27,6 @@ class UserFactory extends Factory
     {
         $gender = $this->faker->randomElement(['male', 'female']);
         $department_id = Department::pluck('id')->toArray();
-        $edu_level_id = EduLevel::pluck('id')->toArray();
         return [
             'name' => $this->faker->name($gender = $this->faker->randomElement(['male', 'female'])),
             'gender' => $gender,
@@ -37,8 +35,9 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'identity_card' => $this->faker->bankAccountNumber(),
             'location' => $this->faker->address(),
+            'major' => $this->faker->paragraph(1),
+            'certificate' => $this->faker->paragraph(1),
             'department_id' => $this->faker->randomElement($department_id),
-            'edu_level_id' => $this->faker->randomElement(EduLevel::pluck('id')->toArray()),
             'salary_id' => $this->faker->randomElement(Salary::pluck('id')->toArray()),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
