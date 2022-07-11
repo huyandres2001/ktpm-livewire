@@ -95,19 +95,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function jobs()
+    public function jobs(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Job::class, 'employee_job', 'employee_id', 'job_id');
     }
-    public function positions()
+    public function positions(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Position::class, 'employee_position', 'employee_id', 'position_id');
     }
-    public function department()
+    public function department(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Department::class);
     }
-    public function salary()
+    public function salary(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Salary::class);
     }

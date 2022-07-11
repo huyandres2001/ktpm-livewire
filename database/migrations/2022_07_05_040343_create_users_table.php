@@ -24,8 +24,8 @@ class CreateUsersTable extends Migration
             $table->string('location')->nullable();
             $table->string('major')->nullable();
             $table->string('certificate')->nullable();
-            $table->foreignId('department_id')->references('id')->on('departments');
-            $table->foreignId('salary_id')->references('id')->on('salaries');
+            $table->foreignId('department_id')->references('id')->on('departments')->onDelete('cascade');
+            $table->foreignId('salary_id')->references('id')->on('salaries')->onDelete('cascade');
             $table->string('password');
             $table->text('about')->nullable();
             $table->timestamp('email_verified_at')->nullable();
