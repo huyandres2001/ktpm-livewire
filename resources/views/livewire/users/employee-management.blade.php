@@ -17,9 +17,6 @@
                             <h5 class="mb-0">All Employees</h5>
                         </div>
                         @can('users.create')
-                            {{--                            <button type="button" class="btn bg-gradient-primary btn-sm mb-0" data-bs-toggle="modal" data-bs-target="#exampleModalMessage">--}}
-                            {{--                                +&nbsp;Message Modal--}}
-                            {{--                            </button>--}}
                             @include('livewire.users.create-employee-modal')
                             <button class="btn bg-gradient-primary btn-sm mb-0" type="button" data-bs-toggle="modal"
                                     data-bs-target="#createEmployeeModal">+&nbsp; New Employee
@@ -35,9 +32,6 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     ID
                                 </th>
-                                {{--                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">--}}
-                                {{--                                    Photo--}}
-                                {{--                                </th>--}}
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     Name
                                 </th>
@@ -120,6 +114,7 @@
                                     </td>
                                     <td class="text-center">
                                         <button href="#" class="mx-3" id="editEmployee"
+                                                wire:click="edit({{$user->id}})"
                                                 style="border: none;padding: 0;background: none;" data-bs-toggle="modal"
                                                 data-bs-target="#editEmployeeModal"
                                                 data-bs-original-title="Edit Employee">

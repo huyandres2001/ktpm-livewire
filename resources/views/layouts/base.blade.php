@@ -58,11 +58,6 @@
 <!-- Theme JS -->
 <script src="../assets/js/soft-ui-dashboard.min.js"></script>
 @livewireScripts
-<script>
-    window.addEventListener('userDeleted', event => {
-        $('#deleteModal' + event.detail.idDeleted).modal('hide');
-    })
-</script>
 
 </body>
 

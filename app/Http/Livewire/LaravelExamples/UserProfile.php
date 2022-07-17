@@ -15,7 +15,7 @@ class UserProfile extends Component
     protected $rules = [
         'user.name' => 'max:40|min:3',
         'user.email' => 'email:rfc,dns',
-        'user.phone' => 'max:10',
+        'user.phone' => 'max:10|required',
         'user.about' => 'max:200',
         'user.location' => 'min:3',
         'user.identity_card' => 'string|required|min:5|max:20',
@@ -23,6 +23,7 @@ class UserProfile extends Component
         'user.department_id' => 'required',
         'user.major' => 'required',
         'user.certificate' => 'required',
+        'user.birthday' => 'required',
     ];
 
     public function mount() {

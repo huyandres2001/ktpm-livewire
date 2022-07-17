@@ -203,7 +203,20 @@ $departments = getAllDepartments();
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="user-birthday"
+                                       class="form-control-label">{{ __('Birthday') }}</label>
+                                <div class="@error('user.birthday') border border-danger rounded-3 @enderror">
+                                    <input wire:model.debounce="user.birthday" class="form-control"
+                                           type="date" placeholder="Birthday" id="user-birthday">
+                                </div>
+                                @error('user.birthday')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="user.location" class="form-control-label">{{ __('Location') }}</label>
                                 <div class="@error('user.location') border border-danger rounded-3 @enderror">
@@ -215,7 +228,7 @@ $departments = getAllDepartments();
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="user-identity_card"
                                     class="form-control-label">{{ __('ID Card') }}</label>
@@ -228,7 +241,7 @@ $departments = getAllDepartments();
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="user-gender">{{ __('Gender') }}</label>
                                 <select wire:model="user.gender" class="form-control" id="user-gender">
@@ -264,7 +277,7 @@ $departments = getAllDepartments();
                                 <label for="user-salary"
                                     class="form-control-label">{{ __('Salary') }}</label>
                                 <div class="@error('user.identity_card') border border-danger rounded-3 @enderror">
-                                    <input value="{{$user->salary->basic_salary}} USD" disabled class="form-control"
+                                    <input value="{{currencyForm($user->salary->basic_salary)}} USD" disabled class="form-control"
                                         type="text" id="user-identity_card">
                                 </div>
                             </div>

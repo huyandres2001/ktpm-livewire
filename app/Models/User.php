@@ -68,13 +68,13 @@ class User extends Authenticatable
         'birthday',
         'phone',
         'email',
+        'major',
+        'certificate',
         'identity_card',
         'location',
         'department_id',
         'salary_id',
-        'position_id',
-
-
+        'password'
     ];
 
     /**
