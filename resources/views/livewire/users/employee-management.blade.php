@@ -1,26 +1,68 @@
+@php
+$departments = getAllDepartments();
+@endphp
 <div class="main-content">
-    <div class="alert alert-secondary mx-4" role="alert">
-        <span class="text-white"><strong>Add, Edit, Delete features are not functional!</strong> This is a
-            <strong>PRO</strong> feature!
-            Click <strong><a href="https://www.creative-tim.com/live/soft-ui-dashboard-pro-laravel" target="_blank"
-                             class="text-white">here</a></strong>
-            to see the PRO
-            product!</span>
-    </div>
-
     <div class="row">
-        <div class="col-12">
+        <div class="col">
             <div class="card mb-4 mx-4">
                 <div class="card-header pb-0">
                     <div class="d-flex flex-row justify-content-between">
-                        <div>
-                            <h5 class="mb-0">All Employees</h5>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <span class="input-group-text text-body"><i class="fas fa-search"
+                                        aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" wire:model.debounce="searchName"
+                                    placeholder="Name...">
+                            </div>
                         </div>
-                        @can('users.create')
-                            @include('livewire.users.create-employee-modal')
-                            <button class="btn bg-gradient-primary btn-sm mb-0" type="button" data-bs-toggle="modal"
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <span class="input-group-text text-body"><i class="fas fa-search"
+                                        aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" wire:model.debounce="searchEmail"
+                                    placeholder="Email...">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <span class="input-group-text text-body"><i class="fas fa-search"
+                                        aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" wire:model.debounce="searchPhone"
+                                    placeholder="Phone...">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <span class="input-group-text text-body"><i class="fas fa-search"
+                                        aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" wire:model.debounce="searchLocation"
+                                    placeholder="Address...">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <select wire:model.debounce="filterDepartment" wire:ignore class="form-control"
+                                    id="user-department" placeholder="Department...">
+                                    <option value="">
+                                        Select department
+                                    </option>
+                                    @foreach ($departments as $department)
+                                        <option value="{{ $department->id }}">
+                                            {{ $department->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            @can('users.create')
+                                @include('livewire.users.create-employee-modal')
+                                <button class="btn bg-gradient-primary btn-sm mb-0" type="button" data-bs-toggle="modal"
                                     data-bs-target="#createEmployeeModal">+&nbsp; New Employee
-                            </button>
+                                </button>
+                            @endcan
+                        </div>
+                        @can('users.update')
+                            @include('livewire.users.edit-employee-modal')
                         @endcan
                     </div>
                 </div>
@@ -28,113 +70,135 @@
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
                             <thead>
-                            <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    ID
-                                </th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Name
-                                </th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Gender
-                                </th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Birthday
-                                </th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Phone
-                                </th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Email
-                                </th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Address
-                                </th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    department
-                                </th>
-                                @hasrole('admin')
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    ID card
-                                </th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Major
-                                </th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    certificate
-                                </th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    salary
-                                </th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Action
-                                </th>
-                                @endhasrole
-                            </tr>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        ID
+                                    </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Name
+                                    </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Gender
+                                    </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Birthday
+                                    </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Phone
+                                    </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Email
+                                    </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Address
+                                    </th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        department
+                                    </th>
+                                    @hasrole('admin')
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            ID card
+                                        </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Major
+                                        </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            certificate
+                                        </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            salary
+                                        </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Action
+                                        </th>
+                                    @endhasrole
+                                </tr>
                             </thead>
                             <tbody>
-                            @foreach($users as $user)
-                                <tr>
-                                    <td class="ps-4">
-                                        <p class="text-xs font-weight-bold mb-0">{{$user->id}}</p>
-                                    </td>
-                                    <td class="text-left">
-                                        <p class="text-xs font-weight-bold mb-0">{{$user->name}}</p>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="{{ $user->gender == 'male' ? 'fa fa-mars' : 'fa fa-venus'}}"></i>
-                                    </td>
-                                    <td class="text-left">
-                                        <p class="text-xs font-weight-bold mb-0">{{$user->birthday}}</p>
-                                    </td>
-                                    <td class="text-left">
-                                        <p class="text-xs font-weight-bold mb-0">{{$user->phone}}</p>
-                                    </td>
-                                    <td class="text-left">
-                                        <p class="text-xs font-weight-bold mb-0">{{$user->email}}</p>
-                                    </td>
-                                    <td class="text-left">
-                                        <p class="text-xs font-weight-bold mb-0">{{Str::limit($user->location,10, $end = '...')}}</p>
-                                    </td>
-                                    <td class="text-left">
-                                        <p class="text-xs font-weight-bold mb-0">{{Str::limit($user->department->name,20, $end = '...')}}</p>
-                                    </td>
-                                    @role('admin')
-                                    <td class="text-left">
-                                        <p class="text-xs font-weight-bold mb-0">{{Str::limit($user->identity_card,3, $end = '...')}}</p>
-                                    </td>
-                                    <td class="text-left">
-                                        <p class="text-xs font-weight-bold mb-0">{{Str::limit($user->major,20, $end = '...')}}</p>
-                                    </td>
-                                    <td class="text-left">
-                                        <p class="text-xs font-weight-bold mb-0">{{Str::limit($user->certificate,20, $end = '...')}}</p>
-                                    </td>
-                                    <td class="text-left">
-                                        <p class="text-xs font-weight-bold mb-0">{{final_salary($user)}}</p>
-                                    </td>
-                                    <td class="text-center">
-                                        <button href="#" class="mx-3" id="editEmployee"
-                                                wire:click="edit({{$user->id}})"
-                                                style="border: none;padding: 0;background: none;" data-bs-toggle="modal"
-                                                data-bs-target="#editEmployeeModal"
-                                                data-bs-original-title="Edit Employee">
-                                            <i class="fas fa-user-edit text-secondary"></i>
-                                        </button>
-                                        <button href="#"
-                                                onclick="javascript:return confirm('Are you sure you want to delete?')"
-                                                wire:click.prevent="delete({{$user->id}})"
-                                                class="mx-3"
-                                                id="deleteEmployee"
-                                                style="border: none;padding: 0;background: none;"
-                                                data-bs-original-title="Delete Employee">
-                                            <i class="fas fa-trash text-secondary"></i>
-                                        </button>
+                                @foreach ($employees as $employee)
+                                    <tr>
+                                        <td class="ps-4">
+                                            <p class="text-xs font-weight-bold mb-0">{{ $employee->id }}</p>
+                                        </td>
+                                        <td class="text-left">
+                                            <p class="text-xs font-weight-bold mb-0">{{ $employee->name }}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <i
+                                                class="{{ $employee->gender == 'male' ? 'fa fa-mars' : 'fa fa-venus' }}"></i>
+                                        </td>
+                                        <td class="text-left">
+                                            <p class="text-xs font-weight-bold mb-0">{{ $employee->birthday }}</p>
+                                        </td>
+                                        <td class="text-left">
+                                            <p class="text-xs font-weight-bold mb-0">{{ $employee->phone }}</p>
+                                        </td>
+                                        <td class="text-left">
+                                            <p class="text-xs font-weight-bold mb-0">{{ $employee->email }}</p>
+                                        </td>
+                                        <td class="text-left">
+                                            <p class="text-xs font-weight-bold mb-0">
+                                                {{ Str::limit($employee->location, 10, $end = '...') }}</p>
+                                        </td>
+                                        <td class="text-left">
+                                            <p class="text-xs font-weight-bold mb-0">
+                                                {{ Str::limit($employee->department->name, 20, $end = '...') }}</p>
+                                        </td>
+                                        @role('admin')
+                                            <td class="text-left">
+                                                <p class="text-xs font-weight-bold mb-0">
+                                                    {{ Str::limit($employee->identity_card, 3, $end = '...') }}</p>
+                                            </td>
+                                            <td class="text-left">
+                                                <p class="text-xs font-weight-bold mb-0">
+                                                    {{ Str::limit($employee->eduLevel->major, 20, $end = '...') }}</p>
+                                            </td>
+                                            <td class="text-left">
+                                                <p class="text-xs font-weight-bold mb-0">
+                                                    {{ Str::limit($employee->eduLevel->certificate, 20, $end = '...') }}
+                                                </p>
+                                            </td>
+                                            <td class="text-left">
+                                                <p class="text-xs font-weight-bold mb-0">
+                                                    {{ currencyForm(final_salary($employee)) }} USD
+                                                </p>
+                                            </td>
+                                            <td class="text-center">
+                                                @can('users.update')
+                                                    <button href="#" class="mx-1" id="editEmployee"
+                                                        wire:click="edit({{ $employee->id }})"
+                                                        style="border: none;padding: 0;background: none;"
+                                                        data-bs-toggle="modal" data-bs-target="#editEmployeeModal"
+                                                        data-bs-original-title="Edit Employee">
+                                                        <i class="fas fa-user-edit text-secondary"></i>
+                                                    </button>
+                                                @endcan
+                                                @can('users.delete')
+                                                    <button href="#"
+                                                        onclick="javascript:return confirm('Are you sure you want to delete?')"
+                                                        wire:click.prevent="delete({{ $employee->id }})" class="mx-1"
+                                                        id="deleteEmployee" style="border: none;padding: 0;background: none;"
+                                                        data-bs-original-title="Delete Employee">
+                                                        <i class="fas fa-trash text-secondary"></i>
+                                                    </button>
+                                                @endcan
 
-                                    </td>
-                                    @include('livewire.users.edit-employee-modal', [$user->id])
-                                    @endrole
-                                </tr>
-                            @endforeach
+                                            </td>
+                                        @endrole
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -143,6 +207,5 @@
         </div>
     </div>
 
-    {{$users->links()}}
+    {{ $employees->links() }}
 </div>
-

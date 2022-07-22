@@ -74,21 +74,39 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Employees</h6>
             </li>
 
-            @can('user.read')
+            @can('users.read')
                 <li class="nav-item pb-2">
                     <a class="nav-link {{ Route::currentRouteName() == 'employee-management' ? 'active' : '' }}"
                        href="{{ route('employee-management') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i style="font-size: 1rem;"
-                               class="fas fa-lg fa-list-ul ps-2 pe-2 text-center
+                               class="fa fa-user
                         {{ in_array(request()->route()->getName(),['employee-management'])? 'text-white': 'text-dark' }}"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Employee Management</span>
+                        <span class="nav-link-text ms-1">Employees Management</span>
                     </a>
                 </li>
             @endcan
 
+            <li class="nav-item mt-2">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Jobs</h6>
+            </li>
+
+            @can('jobs.read')
+                <li class="nav-item pb-2">
+                    <a class="nav-link {{ Route::currentRouteName() == 'job-management' ? 'active' : '' }}"
+                       href="{{ route('job-management') }}">
+                        <div
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i style="font-size: 1rem;"
+                               class="fas fa-lg fa-list-ul ps-2 pe-2 text-center
+                        {{ in_array(request()->route()->getName(),['job-management'])? 'text-white': 'text-dark' }}"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Jobs Management</span>
+                    </a>
+                </li>
+            @endcan
             <li class="nav-item mt-2">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Example pages</h6>
             </li>

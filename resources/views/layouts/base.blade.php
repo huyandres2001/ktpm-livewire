@@ -58,7 +58,6 @@
 <!-- Theme JS -->
 <script src="../assets/js/soft-ui-dashboard.min.js"></script>
 @livewireScripts
-
 </body>
 
 </html>

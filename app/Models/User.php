@@ -68,12 +68,9 @@ class User extends Authenticatable
         'birthday',
         'phone',
         'email',
-        'major',
-        'certificate',
         'identity_card',
         'location',
         'department_id',
-        'salary_id',
         'password'
     ];
 
@@ -95,6 +92,40 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Scope a query to only include popular users.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param String $searchKeyword
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeName($query, $searchKeyword): \Illuminate\Database\Eloquent\Builder
+    {
+        if ($searchKeyword != '') return $query->where('name', 'like', '%' . $searchKeyword . '%');
+        return $query;
+    }
+    public function scopePhone($query, $searchKeyword): \Illuminate\Database\Eloquent\Builder
+    {
+        if ($searchKeyword != '') return $query->where('phone', 'like', '%' . $searchKeyword . '%');
+        return $query;
+    }
+    public function scopeEmail($query, $searchKeyword): \Illuminate\Database\Eloquent\Builder
+    {
+        if ($searchKeyword != '') return $query->where('email', 'like', '%' . $searchKeyword . '%');
+        return $query;
+    }
+    public function scopeLocation($query, $searchKeyword): \Illuminate\Database\Eloquent\Builder
+    {
+        if ($searchKeyword != '') return $query->where('location', 'like', '%' . $searchKeyword . '%');
+        return $query;
+    }
+    public function scopeDepartment($query, $department_id): \Illuminate\Database\Eloquent\Builder
+    {
+        if ($department_id != '') return $query->where('department_id', $department_id);
+        return $query;
+    }
+
     public function jobs(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Job::class, 'employee_job', 'employee_id', 'job_id');
@@ -105,10 +136,18 @@ class User extends Authenticatable
     }
     public function department(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(Department::class)->withDefault();
     }
-    public function salary(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function salary(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->belongsTo(Salary::class);
+        return $this->hasOne(Salary::class, 'employee_id')->withDefault();
+    }
+    public function eduLevel(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(EduLevel::class, 'employee_id')->withDefault([
+            'major' => 'No Major',
+            'certificate' => 'No Certificate',
+            'description' => 'No Certificate',
+        ]);
     }
 }

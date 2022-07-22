@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::create('salaries', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('employee_id')->references('id')->on('users')->cascadeOnDelete();
             $table->bigInteger('basic_salary');
             $table->integer('cofficient')->nullable();
             $table->bigInteger('allowance')->nullable();
             $table->bigInteger('bonus')->nullable();
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

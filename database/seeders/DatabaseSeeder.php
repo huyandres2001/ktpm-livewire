@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             //JobSeeder::class,
             //JobEvaluationSeeder::class,
             //PositionSeeder::class,
-            SalarySeeder::class,
+            //SalarySeeder::class,
             UserSeeder::class,
             RolePermissionSeeder::class,
         ]);

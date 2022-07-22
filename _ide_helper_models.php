@@ -39,6 +39,32 @@ namespace App\Models{
 	class Department extends \Eloquent {}
 }
 
+namespace App\Models{
+/**
+ * App\Models\EduLevel
+ *
+ * @property int $id
+ * @property int $employee_id
+ * @property string $major
+ * @property string $certificate
+ * @property string|null $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $employee
+ * @method static \Database\Factories\EduLevelFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|EduLevel newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EduLevel newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EduLevel query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EduLevel whereCertificate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EduLevel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EduLevel whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EduLevel whereEmployeeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EduLevel whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EduLevel whereMajor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EduLevel whereUpdatedAt($value)
+ */
+	class EduLevel extends \Eloquent {}
+}
 
 namespace App\Models{
 /**
@@ -126,14 +152,15 @@ namespace App\Models{
  * App\Models\Salary
  *
  * @property int $id
+ * @property int $employee_id
  * @property int $basic_salary
  * @property int|null $cofficient
  * @property int|null $allowance
  * @property int|null $bonus
+ * @property string|null $note
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $employees
- * @property-read int|null $employees_count
+ * @property-read \App\Models\User $employee
  * @method static \Database\Factories\SalaryFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Salary newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Salary newQuery()
@@ -143,7 +170,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Salary whereBonus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Salary whereCofficient($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Salary whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Salary whereEmployeeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Salary whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Salary whereNote($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Salary whereUpdatedAt($value)
  */
 	class Salary extends \Eloquent {}
@@ -191,19 +220,27 @@ namespace App\Models{
  * @property string|null $gender
  * @property string|null $birthday
  * @property string $identity_card
+ * @property string|null $major
+ * @property string|null $certificate
  * @property int $department_id
- * @property int $salary_id
  * @property-read \App\Models\Department $department
+ * @property-read \App\Models\EduLevel $eduLevel
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Job[] $jobs
  * @property-read int|null $jobs_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Position[] $positions
  * @property-read int|null $positions_count
  * @property-read \App\Models\Salary $salary
+ * @method static \Illuminate\Database\Eloquent\Builder|User department($department_id)
+ * @method static \Illuminate\Database\Eloquent\Builder|User email($searchKeyword)
+ * @method static \Illuminate\Database\Eloquent\Builder|User location($searchKeyword)
+ * @method static \Illuminate\Database\Eloquent\Builder|User name($searchKeyword)
+ * @method static \Illuminate\Database\Eloquent\Builder|User phone($searchKeyword)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereBirthday($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCertificate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereDepartmentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereGender($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIdentityCard($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereSalaryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereMajor($value)
  */
 	class User extends \Eloquent {}
 }

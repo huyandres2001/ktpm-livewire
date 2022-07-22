@@ -22,10 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email', 50)->nullable()->unique();
             $table->string('identity_card')->unique();
             $table->string('location')->nullable();
-            $table->string('major')->nullable();
-            $table->string('certificate')->nullable();
             $table->foreignId('department_id')->references('id')->on('departments')->onDelete('cascade');
-            $table->foreignId('salary_id')->references('id')->on('salaries')->onDelete('cascade');
             $table->string('password')->default('$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
             $table->text('about')->nullable();
             $table->timestamp('email_verified_at')->nullable();

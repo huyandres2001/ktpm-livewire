@@ -3,157 +3,135 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 use Livewire\Component;
+use App\Models\EduLevel;
+use App\Models\Department;
 use Livewire\WithPagination;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeManagement extends Component
 {
     use WithPagination;
 
-    public User $user;
-    protected $user_id;
-    public $phone = '';
-    public $name = '';
-    public $email = '';
-    public $gender = '';
-    public $birthday = '';
-    public $identity_card = '';
-    public $location = '';
-    public $major = '';
-    public $certificate = '';
-    public $department_id = '';
-    public $salary_id = '';
+    public User $users;
+    public EduLevel $eduLevel;
+    public $user_id = '';
     public $password = '';
-
+    public $searchName = '';
+    public $searchPhone = '';
+    public $searchLocation = '';
+    public $searchEmail = '';
+    public $filterDepartment = '';
     protected $paginationTheme = 'bootstrap';
-
     public function rules()
     {
-
         return [
-            'name' => 'required',
-            'email' =>  ['required', 'email', Rule::unique('users')->ignore($this->user)],
-            'gender' => 'required',
-            'birthday' => 'required',
-            'phone' => ['required', Rule::unique('users')->ignore($this->user)],
-            'identity_card' => ['required', Rule::unique('users')->ignore($this->user)],
-            'location' => 'required',
-            'major' => 'string',
-            'certificate' => 'string',
-            'department_id' => 'required',
-            'salary_id' => 'required',
+            'users.name' => 'required',
+            'users.email' =>  ['required', 'email', Rule::unique('users')->ignore($this->users)],
+            'users.gender' => 'required',
+            'users.birthday' => 'required',
+            'users.phone' => ['required', Rule::unique('users')->ignore($this->users)],
+            'users.identity_card' => ['required', Rule::unique('users')->ignore($this->users)],
+            'users.location' => 'required',
+            'eduLevel.major' => 'string|required',
+            'eduLevel.certificate' => 'string|required',
+            'eduLevel.description' => 'string',
+            'users.department_id' => 'required',
             'password' => 'required|min:6',
         ];
     }
 
     public function render()
     {
-        $data['users'] = User::with('department', 'jobs', 'positions', 'salary')
-            ->where('id', '<>', auth()->user()->id)->paginate(10);
-        $data['messages'] = 'ok';
+        checkAuthenticatedUserPermission('users.read');
+        if ($this->user_id != '') {
+            $data['employees'] = User::where('id',$this->user_id)->paginate(10);
+            return view('livewire.users.employee-management', $data);
+        }
+        $data['employees'] = User::with('department', 'jobs', 'positions', 'salary', 'eduLevel')
+            ->where('id', '<>', auth()->user()->id);
+        $data['employees'] = $data['employees']
+            ->name($this->searchName)
+            ->phone($this->searchPhone)
+            ->location($this->searchLocation)
+            ->email($this->searchEmail)
+            ->department($this->filterDepartment)
+            ->paginate(10);
+
+
         return view('livewire.users.employee-management', $data);
     }
 
-    public function mount()
+    public function mount($id)
     {
-        $this->user = new User();
+        if ($id != NULL && $id != '') {
+            $this->user_id = $id;
+        }
+        $this->users = new User();
+        $this->eduLevel = $this->users->eduLevel;
     }
-
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
     }
-
-
+    public function resetInputFields()
+    {
+        $this->users = new User();
+        $this->eduLevel = $this->users->eduLevel;
+    }
     public function store()
     {
-        if (!(auth()->user()->can('users.create'))) {
-            toastr()->warning('You do not have permission to do that!');
+        checkAuthenticatedUserPermission('users.store');
+        //create new user from validated data
+        $validated = $this->validate();
+        $createdUser = \App\Models\User::create($validated['users']);
+        $createdUser->password = Hash::make($validated['password']);
+        $createdUser->eduLevel()->create($validated['eduLevel']);
+        $this->resetInputFields();
+        if ($createdUser) {
+            toastr()->success('Added new employee!');
         } else {
-            //create new user from validated data
-            //dd($this->validate());
-            $this->validate();
-            $success = \App\Models\User::create([
-                'name' => $this->name,
-                'email' => $this->email,
-                'gender' => $this->gender,
-                'birthday' => $this->birthday,
-                'phone' => $this->phone,
-                'identity_card' => $this->identity_card,
-                'location' => $this->location,
-                'major' => $this->major,
-                'certificate' => $this->certificate,
-                'department_id' => $this->department_id,
-                'salary_id' => $this->salary_id,
-                'password' => Hash::make($this->password),
-            ]);
-            //reset input field
-            $this->reset([
-                'name',
-                'email',
-                'gender',
-                'birthday',
-                'phone',
-                'identity_card',
-                'location',
-                'major',
-                'certificate',
-                'department_id',
-                'salary_id',
-                'password',
-            ]);
-            if ($success) {
-                toastr()->success('Added new employee!');
-            } else {
-                toastr()->error('Something went wrong!');
-            }
+            toastr()->error('Something went wrong!');
         }
     }
-
     public function edit(User $user)
     {
-        $this->user = $user;
-        $this->user_id = $user->id;
-        $this->name = $user->name;
-        $this->phone = $user->phone;
-        $this->email = $user->email;
-        $this->gender = $user->gender;
-        $this->birthday = $user->birthday;
-        $this->identity_card = $user->identity_card;
-        $this->location = $user->location;
-        $this->major = $user->major;
-        $this->certificate = $user->certificate;
-        $this->department_id = $user->department_id;
-        $this->salary_id = $user->salary_id;
+        // \DB::enableQueryLog(); // Enable query log
+        // Department::find(1)->employees;
+        // // Your Eloquent query executed by using get()
+        // dd(\DB::getQueryLog()); // Show results of log
+        $this->users = $user;
+        $this->eduLevel = $user->eduLevel;
     }
-
     public function update()
     {
-        if (!auth()->user()->can('users.update')) {
-            toastr()->warning('You do not have permission to do that!');
+        checkAuthenticatedUserPermission('users.update');
+        $validated = $this->validate();
+        //dd($validated);
+        $user = $this->users;
+        $success = $user->update($validated['users']);
+        if ($success) {
+            $this->reset('password');
+            toastr()->success('Employee updated successfully!');
         } else {
-            $validated = $this->validate();
-            //dd($validated);
-            $user = $this->user;
-            $success = $user->update($validated);
-            if ($success) {
-                $this->reset('password');
-                toastr()->success('Employee updated successfully!');
-            } else {
-                toastr()->error('Something went wrong!');
-            }
+            $this->reset('password');
+            toastr()->error('Something went wrong!');
         }
-
     }
     public function delete($id)
     {
+        checkAuthenticatedUserPermission('users.delete');
         if ($id == \Auth::user()->id) {
             toastr()->error('You cannot delete yourself!');
-        } else {
-            User::find($id)->delete();
+            return;
+        }
+        $user = User::find($id)->delete();
+        if ($user) {
             toastr()->success('Deleted successfully!');
+        } else {
+            toastr()->error('Something went wrong!');
         }
     }
 }

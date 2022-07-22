@@ -9,13 +9,14 @@ class Salary extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'employee_id',
         'basic_salary',
         'cofficient',
         'allowance',
         'bonus',
     ];
 
-    public function employees(){
-        return $this->hasMany(User::class, 'salary_id', 'id');
+    public function employee(){
+        return $this->belongsTo(User::class, 'employee_id', 'id');
     }
 }

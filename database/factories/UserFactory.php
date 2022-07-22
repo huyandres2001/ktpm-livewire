@@ -38,7 +38,6 @@ class UserFactory extends Factory
             'major' => $this->faker->paragraph(1),
             'certificate' => $this->faker->paragraph(1),
             'department_id' => $this->faker->randomElement($department_id),
-            'salary_id' => $this->faker->randomElement(Salary::pluck('id')->toArray()),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
             'email_verified_at' => now(),

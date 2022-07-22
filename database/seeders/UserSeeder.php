@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\EduLevel;
 use App\Models\Job;
 use App\Models\User;
 use App\Models\Salary;
@@ -34,11 +35,8 @@ class UserSeeder extends Seeder
                 'email' => 'huy.nv28122001@gmail.com',
                 'identity_card' => '31231321321',
                 'location' => 'VN',
-                'major' => 'IT',
-                'certificate' => 'Professor',
                 'department_id' => 1,
                 'email_verified_at' => now(),
-                'salary_id' => 1,
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10),
             ],
@@ -50,11 +48,8 @@ class UserSeeder extends Seeder
                 'email' => 'huyandres2001@gmail.com',
                 'identity_card' => '3123132132321',
                 'location' => 'VN',
-                'major' => 'IT',
-                'certificate' => 'Professor',
                 'department_id' => 1,
                 'email_verified_at' => now(),
-                'salary_id' => 1,
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10),
             ],
@@ -66,16 +61,40 @@ class UserSeeder extends Seeder
                 'email' => 'huy.nv192914@sis.hust.edu.vn',
                 'identity_card' => '312313213213123',
                 'location' => 'VN',
-                'major' => 'IT',
-                'certificate' => 'Professor',
                 'department_id' => 1,
                 'email_verified_at' => now(),
-                'salary_id' => 1,
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10),
             ],
         ]);
+        DB::table('salaries')->truncate();
+        DB::table('salaries')->insert([
+            [
+                'employee_id' => 1,
+                'basic_salary' => 1000000,
+                'cofficient' => 2,
+                'allowance' => 100000,
+                'bonus' => 100000,
+                'note' => 'admin1\'s salary',
+            ],
+            [
+                'employee_id' => 2,
+                'basic_salary' => 2000000,
+                'cofficient' => 3,
+                'allowance' => 200000,
+                'bonus' => 200000,
+                'note' => 'admin2\'s salary',
+            ],
+            [
+                'employee_id' => 3,
+                'basic_salary' => 4000000,
+                'cofficient' => 4,
+                'allowance' => 400000,
+                'bonus' => 400000,
+                'note' => 'admin3\'s salary',
+            ],
 
+        ]);
         //delete all records from the following tables
         DB::table('jobs')->truncate();
         DB::table('positions')->truncate();
@@ -85,7 +104,9 @@ class UserSeeder extends Seeder
         //this seeder seeds user and all related many to many relationships with 'users' table
         //in this case, the table that have many to many relationships with 'users' table is 'jobs' pivot: 'employee_job'
         //same with 'employee_position' table
-        User::factory()->count(20)->create();
+        User::factory()->count(20)
+            ->has(Salary::factory()->count(1))
+            ->has(EduLevel::factory()->count(1))->create();
         $users = User::all(); // include Admin above
         $positions = Position::factory()->count(10)->create();
         $jobs = Job::factory()->count(10)
@@ -102,8 +123,8 @@ class UserSeeder extends Seeder
                 ->attach(
                     $jobs->random(rand(1, 10))->pluck('id')->toArray(),
                     [
-                        'assigned_day' => now()->addDays(rand(0,10)),
-                        'deadline' => now()->addDays(rand(10,20)),
+                        'assigned_day' => now()->addDays(rand(0, 10)),
+                        'deadline' => now()->addDays(rand(10, 20)),
                         'requirements' => 'bsadlkadskj'
                     ]
                 );

@@ -10,12 +10,6 @@ if (!function_exists('getAllDepartments')) {
         return Department::all();
     }
 }
-if (!function_exists('getAllSalaries')) {
-    function getAllSalaries(): \Illuminate\Database\Eloquent\Collection
-    {
-        return \App\Models\Salary::all();
-    }
-}
 if (!function_exists('final_salary')) {
     function final_salary(User $user)
     {
@@ -26,5 +20,15 @@ if (!function_exists('currencyForm')) {
     function currencyForm($number): string
     {
         return number_format($number, 0, ".", ",");
+    }
+}
+if (!function_exists('checkAuthenticatedUserPermission')) {
+    function checkAuthenticatedUserPermission($permission)
+    {
+        if(!auth()->user()->can($permission))
+        {
+            toastr()->warning('You do not have permission to do that!');
+            return;
+        }
     }
 }

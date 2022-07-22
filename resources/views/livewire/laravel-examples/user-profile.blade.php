@@ -22,10 +22,10 @@ $departments = getAllDepartments();
                 <div class="col-auto my-auto">
                     <div class="h-100">
                         <h5 class="mb-1">
-                            {{ $user->name }}
+                            {{ $users->name }}
                         </h5>
                         <p class="mb-0 font-weight-bold text-sm">
-                            @foreach ($user->positions as $position)
+                            @foreach ($users->positions as $position)
                                 {{ $position->name }}/
                             @endforeach
                         </p>
@@ -167,11 +167,11 @@ $departments = getAllDepartments();
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="user-name" class="form-control-label">{{ __('Full Name') }}</label>
-                                <div class="@error('user.name') border border-danger rounded-3 @enderror">
-                                    <input wire:model.debounce="user.name" class="form-control" type="text"
+                                <div class="@error('users.name') border border-danger rounded-3 @enderror">
+                                    <input wire:model.debounce="users.name" class="form-control" type="text"
                                         placeholder="Name" id="user-name">
                                 </div>
-                                @error('user.name')
+                                @error('users.name')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -179,11 +179,11 @@ $departments = getAllDepartments();
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="user-email" class="form-control-label">{{ __('Email') }}</label>
-                                <div class="@error('user.email') border border-danger rounded-3 @enderror">
-                                    <input wire:model.debounce="user.email" class="form-control" type="email"
+                                <div class="@error('users.email') border border-danger rounded-3 @enderror">
+                                    <input wire:model.debounce="users.email" class="form-control" type="email"
                                         placeholder="@example.com" id="user-email">
                                 </div>
-                                @error('user.email')
+                                @error('users.email')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -191,11 +191,11 @@ $departments = getAllDepartments();
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="user-phone" class="form-control-label">{{ __('Phone') }}</label>
-                                <div class="@error('user.phone') border border-danger rounded-3 @enderror">
-                                    <input wire:model.debounce="user.phone" class="form-control" type="tel"
+                                <div class="@error('users.phone') border border-danger rounded-3 @enderror">
+                                    <input wire:model.debounce="users.phone" class="form-control" type="tel"
                                         placeholder="40770888444" id="user-phone">
                                 </div>
-                                @error('user.phone')
+                                @error('users.phone')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -203,114 +203,143 @@ $departments = getAllDepartments();
                     </div>
 
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="user-birthday"
-                                       class="form-control-label">{{ __('Birthday') }}</label>
-                                <div class="@error('user.birthday') border border-danger rounded-3 @enderror">
-                                    <input wire:model.debounce="user.birthday" class="form-control"
-                                           type="date" placeholder="Birthday" id="user-birthday">
+                                <label for="user-birthday" class="form-control-label">{{ __('Birthday') }}</label>
+                                <div class="@error('users.birthday') border border-danger rounded-3 @enderror">
+                                    <input wire:model.debounce="users.birthday" class="form-control" type="date"
+                                        placeholder="Birthday" id="user-birthday">
                                 </div>
-                                @error('user.birthday')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="user.location" class="form-control-label">{{ __('Location') }}</label>
-                                <div class="@error('user.location') border border-danger rounded-3 @enderror">
-                                    <input wire:model.debounce="user.location" class="form-control" type="text"
-                                        placeholder="Location" id="name">
-                                </div>
-                                @error('user.location')
+                                @error('users.birthday')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="users.location" class="form-control-label">{{ __('Location') }}</label>
+                                <div class="@error('users.location') border border-danger rounded-3 @enderror">
+                                    <input wire:model.debounce="users.location" class="form-control" type="text"
+                                        placeholder="Location" id="name">
+                                </div>
+                                @error('users.location')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="user-identity_card"
                                     class="form-control-label">{{ __('ID Card') }}</label>
-                                <div class="@error('user.identity_card') border border-danger rounded-3 @enderror">
-                                    <input wire:model.debounce="user.identity_card" class="form-control"
+                                <div class="@error('users.identity_card') border border-danger rounded-3 @enderror">
+                                    <input wire:model.debounce="users.identity_card" class="form-control"
                                         type="text" placeholder="ID Card" id="user-identity_card">
                                 </div>
-                                @error('user.identity_card')
+                                @error('users.identity_card')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="user-gender">{{ __('Gender') }}</label>
-                                <select wire:model="user.gender" class="form-control" id="user-gender">
-                                    <option selected>Select gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
-                                </select>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="user-gender">{{ __('Department') }}</label>
-                                <select wire:model="user.department_id" wire:ignore class="form-control"
-                                    id="user-department">
-                                    <option selected value="{{ $user->department_id }}">
-                                        {{ $user->department->name }}
-                                    </option>
-                                    @foreach ($departments as $department)
-                                        <option value="{{ $department->id }}">
-                                            {{ $department->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('user.department_id')
+                                <label for="user-gender">{{ __('Gender') }}</label>
+                                <div class="@error('users.gender') border border-danger rounded-3 @enderror">
+                                    <select wire:model="users.gender" class="form-control" id="user-gender">
+                                        <option selected>Select gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                @error('users.gender')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="user-salary"
-                                    class="form-control-label">{{ __('Salary') }}</label>
-                                <div class="@error('user.identity_card') border border-danger rounded-3 @enderror">
-                                    <input value="{{currencyForm($user->salary->basic_salary)}} USD" disabled class="form-control"
-                                        type="text" id="user-identity_card">
+                                <label for="user-department_id">{{ __('Department') }}</label>
+                                <div class="@error('users.department_id') border border-danger rounded-3 @enderror">
+                                    <select wire:model="users.department_id" wire:ignore class="form-control"
+                                        id="user-department">
+                                        <option selected value="{{ $users->department_id }}">
+                                            {{ $users->department->name }}
+                                        </option>
+                                        @foreach ($departments as $department)
+                                            <option value="{{ $department->id }}">
+                                                {{ $department->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
+                                @error('users.department_id')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="user-major"
-                                       class="form-control-label">{{ __('Major') }}</label>
-                                <div class="@error('user.major') border border-danger rounded-3 @enderror">
-                                    <input value="{{$user->major}}"  class="form-control"
-                                           type="text" id="user-major">
+                                <div class="@error('users.salary') border border-danger rounded-3 @enderror">
+                                    <label for="user-salary" class="form-control-label">{{ __('Salary') }}</label>
+                                    <div class="@error('users.salary') border border-danger rounded-3 @enderror">
+                                        <input value="{{ currencyForm($users->salary->basic_salary) }} USD" disabled
+                                            class="form-control" type="text" id="user-salary">
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="user-certificate"
-                                       class="form-control-label">{{ __('Certificate') }}</label>
-                                <div class="@error('user.certificate') border border-danger rounded-3 @enderror">
-                                    <input value="{{$user->certificate}}"  class="form-control"
-                                           type="text" id="user-certificate">
-                                </div>
+                                @error('users.salary')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="user-major" class="form-control-label">{{ __('Major') }}</label>
+                                <div class="@error('eduLevel.major') border border-danger rounded-3 @enderror">
+                                    <input placeholder="{{ $users->eduLevel->major }}"  wire:model.debounce="eduLevel.major" class="form-control" type="text"
+                                        id="user-major">
+                                </div>
+                                @error('eduLevel.major')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="user-certificate"
+                                    class="form-control-label">{{ __('Certificate') }}</label>
+                                <div class="@error('edulevel.certificate') border border-danger rounded-3 @enderror">
+                                    <input class="form-control" type="text"  wire:model.debounce="eduLevel.certificate"
+                                        id="user-certificate" placeholder="{{ $users->eduLevel->certificate }}">
+                                </div>
+                                @error('eduLevel.certificate')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="user-eduLevel-description"
+                                    class="form-control-label">{{ __('Education level description') }}</label>
+                                <div class="@error('edulevel.description') border border-danger rounded-3 @enderror">
+                                    <input placeholder="{{ $users->eduLevel->description }}" wire:model.debounce="eduLevel.description" class="form-control" type="text"
+                                        id="user-eduLevel-description">
+                                </div>
+                                @error('eduLevel.description')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="about">{{ 'About Me' }}</label>
-                        <div class="@error('user.about') border border-danger rounded-3 @enderror">
-                            <textarea wire:model="user.about" class="form-control" id="about" rows="3"
+                        <div class="@error('users.about') border border-danger rounded-3 @enderror">
+                            <textarea wire:model="users.about" class="form-control" id="about" rows="3"
                                 placeholder="Say something about yourself"></textarea>
                         </div>
-                        @error('user.about')
+                        @error('users.about')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
