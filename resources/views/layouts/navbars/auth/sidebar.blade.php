@@ -107,6 +107,24 @@
                     </a>
                 </li>
             @endcan
+
+            <li class="nav-item mt-2">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Departments</h6>
+            </li>
+            @can('departments.read')
+            <li class="nav-item pb-2">
+                <a class="nav-link {{ Route::currentRouteName() == 'department-management' ? 'active' : '' }}"
+                   href="{{ route('department-management') }}">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i style="font-size: 1rem;"
+                           class="fa fa-building ps-2 pe-2 text-center
+                    {{ in_array(request()->route()->getName(),['department-management'])? 'text-white': 'text-dark' }}"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Departments Management</span>
+                </a>
+            </li>
+        @endcan
             <li class="nav-item mt-2">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Example pages</h6>
             </li>
@@ -303,7 +321,7 @@
             </li>
         </ul>
     </div>
-    <div class="sidenav-footer mx-3 mt-3 pt-3">
+    {{-- <div class="sidenav-footer mx-3 mt-3 pt-3">
         <div class="card card-background shadow-none card-background-mask-secondary" id="sidenavCard">
             <div class="full-background"
                 style="background-image: url('../assets/img/curved-images/white-curved.jpeg')">
@@ -322,5 +340,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </aside>

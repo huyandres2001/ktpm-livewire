@@ -74,7 +74,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" id="addjobsButton" class="btn bg-gradient-primary" wire:click="update">Edit
+                    <button type="button" id="addjobsButton" class="btn bg-gradient-primary"  wire:click="update">Edit
                     </button>
                 </div>
             </div>

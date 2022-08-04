@@ -23,6 +23,16 @@ if (!function_exists('final_salary')) {
         return $user->salary->basic_salary * $user->salary->cofficient + $user->salary->allowance + $user->salary->bonus;
     }
 }
+if (!function_exists('totalSalaryOfDepartment')) {
+    function totalSalaryOfDepartment(Department $department)
+    {
+        $totalSalary = 0;
+        foreach ($department->employees as $employee) {
+            $totalSalary += final_salary($employee);
+        }
+        return $totalSalary;
+    }
+}
 if (!function_exists('currencyForm')) {
     function currencyForm($number): string
     {

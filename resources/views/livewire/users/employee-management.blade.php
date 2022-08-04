@@ -108,22 +108,6 @@ $departments = getAllDepartments();
                                     @hasrole('admin')
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            ID card
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Major
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            certificate
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            salary
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Action
                                         </th>
                                     @endhasrole
@@ -160,30 +144,12 @@ $departments = getAllDepartments();
                                                 {{ Str::limit($employee->department->name, 20, $end = '...') }}</p>
                                         </td>
                                         @role('admin')
-                                            <td class="text-left">
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ Str::limit($employee->identity_card, 3, $end = '...') }}</p>
-                                            </td>
-                                            <td class="text-left">
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ Str::limit($employee->eduLevel->major, 20, $end = '...') }}</p>
-                                            </td>
-                                            <td class="text-left">
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ Str::limit($employee->eduLevel->certificate, 20, $end = '...') }}
-                                                </p>
-                                            </td>
-                                            <td class="text-left">
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ currencyForm(final_salary($employee)) }} USD
-                                                </p>
-                                            </td>
                                             <td class="text-center">
                                                 @can('users.read')
                                                     <button href="#" class="mx-1" id="showEmployee"
                                                         wire:click="show({{ $employee->id }})"
-                                                        style="border: none;padding: 0;background: none;"
-                                                        data-bs-toggle="modal" data-bs-target="#showEmployeeModal"
+                                                        style="border: none;padding: 0;background: none;" data-bs-toggle="modal"
+                                                        data-bs-target="#showEmployeeModal"
                                                         data-bs-original-title="Show Employee">
                                                         <i class="fas fa-eye text-secondary"></i>
                                                     </button>
@@ -191,8 +157,8 @@ $departments = getAllDepartments();
                                                 @can('users.update')
                                                     <button href="#" class="mx-1" id="editEmployee"
                                                         wire:click="edit({{ $employee->id }})"
-                                                        style="border: none;padding: 0;background: none;"
-                                                        data-bs-toggle="modal" data-bs-target="#editEmployeeModal"
+                                                        style="border: none;padding: 0;background: none;" data-bs-toggle="modal"
+                                                        data-bs-target="#editEmployeeModal"
                                                         data-bs-original-title="Edit Employee">
                                                         <i class="fas fa-user-edit text-secondary"></i>
                                                     </button>

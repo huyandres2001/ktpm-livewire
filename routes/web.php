@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Auth\ResetPassword;
 use App\Http\Livewire\EmployeeManagement;
 use App\Http\Livewire\Auth\ForgotPassword;
+use App\Http\Livewire\DepartmentManagement;
 use App\Http\Livewire\LaravelExamples\UserProfile;
 
 /*
@@ -49,4 +50,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/user-profile', UserProfile::class)->name('user-profile');
     Route::get('/employee-management/{id?}', EmployeeManagement::class)->name('employee-management');
     Route::get('/job-management', JobManagement::class)->name('job-management');
+    Route::get('/department-management', DepartmentManagement::class)->name('department-management');
 });
