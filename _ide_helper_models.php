@@ -81,10 +81,14 @@ namespace App\Models{
  * @property-read int|null $employees_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\JobEvaluation[] $job_evaluations
  * @property-read int|null $job_evaluations_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Job assignee($keyword)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job createdDate($startDate, $endDate)
  * @method static \Database\Factories\JobFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job name($keyword)
  * @method static \Illuminate\Database\Eloquent\Builder|Job newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Job newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Job query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Job schedule($startDate, $endDate)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereId($value)

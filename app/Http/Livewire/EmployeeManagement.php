@@ -16,8 +16,9 @@ class EmployeeManagement extends Component
     use WithPagination;
 
     public User $users;
+    public User $showEmployee;
     public EduLevel $eduLevel;
-    public $user_id = '';
+    public $user_id = ''; //pass from job details, show assignee of that job
     public $password = '';
     public $searchName = '';
     public $searchPhone = '';
@@ -64,22 +65,27 @@ class EmployeeManagement extends Component
         return view('livewire.users.employee-management', $data);
     }
 
-    public function mount($id)
+    public function mount($id = '')
     {
         if ($id != NULL && $id != '') {
             $this->user_id = $id;
         }
         $this->users = new User();
+        $this->showEmployee = new User();
         $this->eduLevel = $this->users->eduLevel;
     }
     public function updated($propertyName)
     {
+        $this->user_id = '';
         $this->validateOnly($propertyName);
     }
     public function resetInputFields()
     {
         $this->users = new User();
         $this->eduLevel = $this->users->eduLevel;
+    }
+    public function show(User $user){
+        $this->showEmployee = $user;
     }
     public function store()
     {

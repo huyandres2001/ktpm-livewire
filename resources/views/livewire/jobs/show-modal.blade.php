@@ -29,17 +29,43 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md">
+                        <h5>Note:</h5>
+                        <p>{{ $showJob->note }}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
                     <h5>Assignee:</h5>
                     @foreach ($showJob->employees as $assignee)
                         <div class="col-md-3">
-                            <a href="{{ route('employee-management', ['id' => $assignee->id]) }}"
-                                target="_blank" {{-- wire:click="assigneeProfile({{ $assignee->id }})" --}}>{{ $assignee->name }}</a>
+                            <a href="{{ route('employee-management', ['id' => $assignee->id]) }}" target="_blank"
+                                {{-- wire:click="assigneeProfile({{ $assignee->id }})" --}}>{{ $assignee->name }}</a>
                         </div>
-                        {{-- <button href="#" class="mx-1" id="jobDetails" wire:click="assigneeProfile({{ $assignee->id }})"
-                            style="border: none;padding: 0;background: none;" data-bs-toggle="modal"
-                            data-bs-target="#showUserModal" data-bs-original-title="{{ $assignee->name }}">
-
-                        </button> --}}
+                    @endforeach
+                </div>
+                <hr>
+                <div class="row">
+                    <h5>Evaluations:</h5>
+                    @foreach ($showJob->job_evaluations as $evaluation)
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h6>Progress:</h6>
+                                <p>{{ $evaluation->progress }}</p>
+                            </div>
+                            <div class="col-md-3">
+                                <h6>Status:</h6>
+                                <p>{{ $evaluation->status }}</p>
+                            </div>
+                            <div class="col-md-3">
+                                <h6>KPI:</h6>
+                                <p>{{ $evaluation->kpi }}</p>
+                            </div>
+                            <div class="col-md-3">
+                                <h6>Created at:</h6>
+                                <p>{{ $evaluation->created_at }}</p>
+                            </div>
+                        </div>
                     @endforeach
                 </div>
             </div>

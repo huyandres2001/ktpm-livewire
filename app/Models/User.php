@@ -125,7 +125,11 @@ class User extends Authenticatable
         if ($department_id != '') return $query->where('department_id', $department_id);
         return $query;
     }
-
+    // public function scopeJob($query, $jobId)
+    // {
+    //     if ($department_id != '') return $query->where('department_id', $department_id);
+    //     return $query;
+    // }
     public function jobs(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Job::class, 'employee_job', 'employee_id', 'job_id');

@@ -64,6 +64,9 @@ $departments = getAllDepartments();
                         @can('users.update')
                             @include('livewire.users.edit-employee-modal')
                         @endcan
+                        @can('users.read')
+                            @include('livewire.users.show-modal')
+                        @endcan
                     </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -176,6 +179,15 @@ $departments = getAllDepartments();
                                                 </p>
                                             </td>
                                             <td class="text-center">
+                                                @can('users.read')
+                                                    <button href="#" class="mx-1" id="showEmployee"
+                                                        wire:click="show({{ $employee->id }})"
+                                                        style="border: none;padding: 0;background: none;"
+                                                        data-bs-toggle="modal" data-bs-target="#showEmployeeModal"
+                                                        data-bs-original-title="Show Employee">
+                                                        <i class="fas fa-eye text-secondary"></i>
+                                                    </button>
+                                                @endcan
                                                 @can('users.update')
                                                     <button href="#" class="mx-1" id="editEmployee"
                                                         wire:click="edit({{ $employee->id }})"
@@ -187,7 +199,7 @@ $departments = getAllDepartments();
                                                 @endcan
                                                 @can('users.delete')
                                                     <button href="#"
-                                                        onclick="javascript:return confirm('Are you sure you want to delete?')"
+                                                        onclick="confirm('Are you sure you want to remove the user from this group?') || event.stopImmediatePropagation()"
                                                         wire:click.prevent="delete({{ $employee->id }})" class="mx-1"
                                                         id="deleteEmployee" style="border: none;padding: 0;background: none;"
                                                         data-bs-original-title="Delete Employee">
