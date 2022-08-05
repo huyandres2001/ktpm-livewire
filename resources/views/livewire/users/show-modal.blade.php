@@ -43,6 +43,7 @@
                         </h5>
                     </div>
                 </div>
+                <hr>
                 <div class="row">
                     <div class="col-md-4">
                         <h5>Major: <p> {{ $showEmployee->eduLevel->major }}</p>
@@ -56,8 +57,20 @@
                         <h5>Edu level description: <p> {{ $showEmployee->eduLevel->description }}</p>
                         </h5>
                     </div>
-
                 </div>
+                <hr>
+                @foreach ($showEmployee->positions as $position)
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5>Position's name: <p> {{ $position->name }}</p>
+                            </h5>
+                        </div>
+                        <div class="col-md-8">
+                            <h5>Position's description: <p> {{ $position->description }}</p>
+                            </h5>
+                        </div>
+                    </div>
+                @endforeach
                 {{-- <div class="row">
                     <div class="col-md">
                         <h5>Description:</h5>
