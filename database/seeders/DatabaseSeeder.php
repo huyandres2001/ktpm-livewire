@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
         ]);
 
-        //Schema::enableForeignKeyConstraints();
+        Schema::enableForeignKeyConstraints();
 //        $this->call([
 //            RolePermissionSeeder::class,
 //        ]);
